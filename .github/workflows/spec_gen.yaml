@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - 'spec/**'
+  workflow_dispatch:
 
 jobs:
   generate_spec:
