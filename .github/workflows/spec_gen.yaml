@@ -24,15 +24,15 @@ jobs:
         with:
           command: "bundle -o spec.yaml -t yaml spec/main.yaml"
 
-      - name: Publish spec
+      - name: "Generar documentación con Swagger UI"
         uses: Legion2/swagger-ui-action@v1
         with:
             output: specs
             spec-file: spec.yaml
-            GITHUB_TOKEN: ${{ secrets.XATAL_GITHUB_TOKEN }}
+            GITHUB_TOKEN: ${{ secrets.EDSON_GITHUB_TOKEN }}
 
-      - name: Deploy on GitHub Pages
+      - name: "Publicar documentación en GitHub Pages"
         uses: peaceiris/actions-gh-pages@v3
         with:
-            github_token: ${{ secrets.XATAL_GITHUB_TOKEN }}
+            github_token: ${{ secrets.EDSON_GITHUB_TOKEN }}
             publish_dir: specs
