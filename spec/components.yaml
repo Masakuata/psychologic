@@ -1,0 +1,32 @@
+components:
+  parameters:
+    password:
+      name: "Authorization"
+      in: "header"
+      description: "Contraseña para autenticación"
+      required: true
+      schema:
+        type: string
+        example: "my_secure_password"
+  schemas:
+    new_user:
+      type: object
+      properties:
+        name:
+          type: string
+          example: "Juan Pérez"
+        email:
+          type: string
+          example: "juan.perez@example.com"
+    registered_user:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: "Juan Pérez"
+        email:
+          type: string
+          example: "juan.perez@example.com"
