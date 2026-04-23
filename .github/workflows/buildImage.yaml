@@ -45,7 +45,7 @@ jobs:
         with:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
-          password: ${{ secrets.EDSON_GITHUB_TOKEN }}
+          password: ${{ secrets.AUTOMATION_TOKEN }}
 
       - name: "Setup java"
         uses: actions/setup-java@v3

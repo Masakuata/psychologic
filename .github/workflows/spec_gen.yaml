@@ -30,10 +30,10 @@ jobs:
         with:
             output: specs
             spec-file: spec.yaml
-            GITHUB_TOKEN: ${{ secrets.EDSON_GITHUB_TOKEN }}
+            GITHUB_TOKEN: ${{ secrets.AUTOMATION_TOKEN }}
 
       - name: "Publicar documentación en GitHub Pages"
         uses: peaceiris/actions-gh-pages@v3
         with:
-            github_token: ${{ secrets.EDSON_GITHUB_TOKEN }}
+            github_token: ${{ secrets.AUTOMATION_TOKEN }}
             publish_dir: specs
