@@ -1,0 +1,69 @@
+openapi: 3.0.0
+info:
+  title: Psychologic API
+  description: API para la aplicación Psychologic
+  version: 0.0.1
+servers:
+  - url: 'http://localhost:42700'
+    description: Servidor local de desarrollo
+paths:
+  /users:
+    summary: Catalogo de usuarios
+    description: Operaciones relacionadas con los usuarios de la aplicación
+    get:
+      summary: Obtener lista de usuarios
+      tags:
+        - Usuarios
+      parameters:
+        - name: Authorization
+          in: header
+          description: Contraseña para autenticación
+          required: true
+          schema:
+            type: string
+            example: my_secure_password
+      responses:
+        '200':
+          description: Lista de usuarios obtenida exitosamente
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/paths/~1users/post/responses/201/content/application~1json/schema'
+    post:
+      summary: Crear un nuevo usuario
+      tags:
+        - Usuarios
+      parameters:
+        - $ref: '#/paths/~1users/get/parameters/0'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: Juan Pérez
+                email:
+                  type: string
+                  example: juan.perez@example.com
+      responses:
+        '201':
+          description: Usuario creado exitosamente
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 1
+                  name:
+                    type: string
+                    example: Juan Pérez
+                  email:
+                    type: string
+                    example: juan.perez@example.com
