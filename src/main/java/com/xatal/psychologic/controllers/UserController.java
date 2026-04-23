@@ -21,8 +21,8 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping
-    public ResponseEntity<?> getUser() {
-        return ResponseEntity.ok("Hello, User!");
+    public ResponseEntity<?> getUsers() {
+        return ResponseEntity.ok(userService.getAllUsers());
     }
 
     @PostMapping

@@ -12,6 +12,10 @@ import lombok.AllArgsConstructor;
 public class UserService {
     private final UserRepository userRepository;
 
+    public Iterable<User> getAllUsers() {
+        return userRepository.findAll();
+    }
+
     public void createUser(String username, String email) {
         userRepository.save(new User(username, email));
     }
