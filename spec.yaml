@@ -7,12 +7,14 @@ servers:
   - url: 'http://localhost:42700'
     description: Servidor local de desarrollo
 paths:
-  /users:
-    summary: Catalogo de usuarios
-    description: Operaciones relacionadas con los usuarios de la aplicación
+  /pacientes:
+    summary: Operaciones relacionadas con pacientes
+    description: Endpoints para gestionar pacientes en la aplicación Psychologic
     get:
-      summary: Obtener lista de usuarios
+      summary: Obtener lista de pacientes
+      description: Devuelve una lista de pacientes registrados en el sistema
       tags:
+        - Pacientes
         - Usuarios
       parameters:
         - name: Authorization
@@ -24,46 +26,286 @@ paths:
             example: my_secure_password
       responses:
         '200':
-          description: Lista de usuarios obtenida exitosamente
+          description: Lista de pacientes obtenida exitosamente
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/paths/~1users/post/responses/201/content/application~1json/schema'
+                  type: object
+                  allOf:
+                    - $ref: '#/paths/~1pacientes/post/responses/201/content/application~1json/schema'
+                    - $ref: '#/paths/~1pacientes/post/responses/201/content/application~1json/schema'
+        '204':
+          description: No se encontraron pacientes
+        '401':
+          description: No autorizado - Contraseña incorrecta
     post:
-      summary: Crear un nuevo usuario
+      summary: Crear un nuevo paciente
+      description: Permite crear un nuevo paciente en el sistema
       tags:
+        - Pacientes
         - Usuarios
       parameters:
-        - $ref: '#/paths/~1users/get/parameters/0'
+        - $ref: '#/paths/~1pacientes/get/parameters/0'
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                name:
-                  type: string
-                  example: Juan Pérez
-                email:
-                  type: string
-                  example: juan.perez@example.com
+              allOf:
+                - type: object
+                  properties:
+                    name:
+                      type: string
+                      example: Juan Pérez
+                    email:
+                      type: string
+                      example: juan.perez@example.com
       responses:
         '201':
-          description: Usuario creado exitosamente
+          description: Paciente creado exitosamente
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  id:
-                    type: integer
-                    example: 1
-                  name:
-                    type: string
-                    example: Juan Pérez
-                  email:
-                    type: string
-                    example: juan.perez@example.com
+                allOf:
+                  - type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 1
+                      name:
+                        type: string
+                        example: Juan Pérez
+                      email:
+                        type: string
+                        example: juan.perez@example.com
+        '400':
+          description: Solicitud inválida - Datos faltantes o incorrectos
+        '401':
+          description: No autorizado - Contraseña incorrecta
+        '409':
+          description: Conflicto - El email ya está registrado
+  '/pacientes/{id}':
+    summary: Operaciones relacionadas con un paciente específico
+    description: Endpoints para gestionar un paciente específico en la aplicación Psychologic
+    get:
+      summary: Obtener información de un paciente
+      description: Devuelve la información de un paciente específico por su ID
+      tags:
+        - Pacientes
+        - Usuarios
+      parameters:
+        - $ref: '#/paths/~1pacientes/get/parameters/0'
+        - name: id
+          in: path
+          description: ID del paciente a obtener
+          required: true
+          schema:
+            type: integer
+            example: 1
+      responses:
+        '200':
+          description: Paciente obtenido exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/paths/~1pacientes/post/responses/201/content/application~1json/schema'
+        '404':
+          description: Paciente no encontrado
+    put:
+      summary: Actualizar información de un paciente
+      description: Actualiza la información de un paciente específico por su ID
+      tags:
+        - Pacientes
+        - Usuarios
+      parameters:
+        - $ref: '#/paths/~1pacientes/get/parameters/0'
+        - name: id
+          in: path
+          description: ID del paciente a actualizar
+          required: true
+          schema:
+            type: integer
+            example: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/paths/~1pacientes/post/requestBody/content/application~1json/schema'
+      responses:
+        '200':
+          description: Paciente actualizado exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/paths/~1pacientes/post/responses/201/content/application~1json/schema'
+        '401':
+          description: No autorizado - Contraseña incorrecta
+        '404':
+          description: Paciente no encontrado
+        '409':
+          description: Conflicto - El email ya está registrado
+    delete:
+      summary: Eliminar un paciente
+      description: Elimina un paciente específico por su ID
+      tags:
+        - Pacientes
+        - Usuarios
+      parameters:
+        - $ref: '#/paths/~1pacientes/get/parameters/0'
+        - name: id
+          in: path
+          description: ID del paciente a eliminar
+          required: true
+          schema:
+            type: integer
+            example: 1
+      responses:
+        '204':
+          description: Paciente eliminado exitosamente
+        '401':
+          description: No autorizado - Contraseña incorrecta
+        '404':
+          description: Paciente no encontrado
+  /psicologos:
+    summary: Operaciones relacionadas con psicólogos
+    description: Endpoints para gestionar psicólogos en la aplicación Psychologic
+    get:
+      summary: Obtener lista de psicólogos
+      description: Devuelve una lista de psicólogos registrados en el sistema
+      tags:
+        - Psicólogos
+        - Usuarios
+      parameters:
+        - $ref: '#/paths/~1pacientes/get/parameters/0'
+      responses:
+        '200':
+          description: Lista de psicólogos obtenida exitosamente
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  allOf:
+                    - $ref: '#/paths/~1psicologos/post/responses/201/content/application~1json/schema'
+        '204':
+          description: No se encontraron psicólogos
+        '401':
+          description: No autorizado - Contraseña incorrecta
+    post:
+      summary: Crear un nuevo psicólogo
+      description: Permite crear un nuevo psicólogo en el sistema
+      tags:
+        - Psicólogos
+        - Usuarios
+      parameters:
+        - $ref: '#/paths/~1pacientes/get/parameters/0'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/paths/~1pacientes/post/requestBody/content/application~1json/schema/allOf/0'
+      responses:
+        '201':
+          description: Psicólogo creado exitosamente
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/paths/~1pacientes/post/responses/201/content/application~1json/schema/allOf/0'
+        '400':
+          description: Solicitud inválida - Datos faltantes o incorrectos
+        '401':
+          description: No autorizado - Contraseña incorrecta
+        '409':
+          description: Conflicto - El email ya está registrado
+  '/psicologos/{id}':
+    summary: Endpoints para gestionar un psicólogo específico en la aplicación Psychologic
+    description: Endpoints para gestionar un psicólogo específico por su ID en la aplicación Psychologic
+    get:
+      summary: Obtener información de un psicólogo
+      description: Devuelve la información de un psicólogo específico por su ID
+      tags:
+        - Psicólogos
+        - Usuarios
+      parameters:
+        - $ref: '#/paths/~1pacientes/get/parameters/0'
+        - name: id
+          in: path
+          description: ID del psicólogo a obtener
+          required: true
+          schema:
+            type: integer
+            example: 1
+      responses:
+        '200':
+          description: Psicólogo obtenido exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/paths/~1psicologos/post/responses/201/content/application~1json/schema'
+        '401':
+          description: No autorizado - Contraseña incorrecta
+        '404':
+          description: Psicólogo no encontrado
+    put:
+      summary: Actualizar información de un psicólogo
+      description: Actualiza la información de un psicólogo específico por su ID
+      tags:
+        - Psicólogos
+        - Usuarios
+      parameters:
+        - $ref: '#/paths/~1pacientes/get/parameters/0'
+        - name: id
+          in: path
+          description: ID del psicólogo a actualizar
+          required: true
+          schema:
+            type: integer
+            example: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/paths/~1psicologos/post/requestBody/content/application~1json/schema'
+      responses:
+        '200':
+          description: Psicólogo actualizado exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/paths/~1psicologos/post/responses/201/content/application~1json/schema'
+        '401':
+          description: No autorizado - Contraseña incorrecta
+        '404':
+          description: Psicólogo no encontrado
+        '409':
+          description: Conflicto - El email ya está registrado
+    delete:
+      summary: Eliminar un psicólogo
+      description: Elimina un psicólogo específico por su ID
+      tags:
+        - Psicólogos
+        - Usuarios
+      parameters:
+        - $ref: '#/paths/~1pacientes/get/parameters/0'
+        - name: id
+          in: path
+          description: ID del psicólogo a eliminar
+          required: true
+          schema:
+            type: integer
+            example: 1
+      responses:
+        '204':
+          description: Psicólogo eliminado exitosamente
+        '401':
+          description: No autorizado - Contraseña incorrecta
+        '404':
+          description: Psicólogo no encontrado
