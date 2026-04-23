@@ -1,5 +1,6 @@
 package com.xatal.psychologic.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jakarta.persistence.Column;
@@ -30,6 +31,10 @@ public abstract class User {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @Column(name = "password", nullable = false)
     private String password;
+
+    @JsonIgnore
+    @Column(name = "is_active", nullable = false)
+    private boolean isActive;
 
     public User(String nombre, String email, String password) {
         this.nombre = nombre;
