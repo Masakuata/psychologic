@@ -21,7 +21,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @Order(Ordered.HIGHEST_PRECEDENCE + 1)
 public class PasswordFilter implements jakarta.servlet.Filter {
-    InterceptorConfig interceptorConfig;
+    private final String BEARER_PREFIX = "Bearer ";
+    private final InterceptorConfig interceptorConfig;
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
@@ -45,8 +46,8 @@ public class PasswordFilter implements jakarta.servlet.Filter {
 
     private String getHeaderPassword(HttpServletRequest request) {
         String header = request.getHeader(HttpHeaders.AUTHORIZATION);
-        if (header != null && !header.isEmpty() && header.startsWith("Bearer ")) {
-            return header.substring(7);
+        if (header != null && !header.isEmpty() && header.startsWith(BEARER_PREFIX)) {
+            return header.substring(BEARER_PREFIX.length()).trim();
         }
         return null;
     }
