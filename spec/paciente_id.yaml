@@ -1,0 +1,82 @@
+summary: "Operaciones relacionadas con un paciente específico"
+description: "Endpoints para gestionar un paciente específico en la aplicación Psychologic"
+get:
+  summary: "Obtener información de un paciente"
+  description: "Devuelve la información de un paciente específico por su ID"
+  tags:
+    - "Pacientes"
+    - "Usuarios"
+  parameters:
+    - $ref: 'components.yaml#/components/parameters/password'
+    - name: "id"
+      in: "path"
+      description: "ID del paciente a obtener"
+      required: true
+      schema:
+        type: integer
+        example: 1
+  responses:
+    200:
+      description: "Paciente obtenido exitosamente"
+      content:
+        application/json:
+          schema:
+            $ref: 'components.yaml#/components/schemas/paciente_registrado'
+    404:
+      description: "Paciente no encontrado"
+put:
+  summary: "Actualizar información de un paciente"
+  description: "Actualiza la información de un paciente específico por su ID"
+  tags:
+    - "Pacientes"
+    - "Usuarios"
+  parameters:
+    - $ref: 'components.yaml#/components/parameters/password'
+    - name: "id"
+      in: "path"
+      description: "ID del paciente a actualizar"
+      required: true
+      schema:
+        type: integer
+        example: 1
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: 'components.yaml#/components/schemas/nuevo_paciente'
+  responses:
+    200:
+      description: "Paciente actualizado exitosamente"
+      content:
+        application/json:
+          schema:
+            $ref: 'components.yaml#/components/schemas/paciente_registrado'
+    404:
+      description: "Paciente no encontrado"
+    409:
+      description: "Conflicto - El email ya está registrado"
+    401:
+      description: "No autorizado - Contraseña incorrecta"
+delete:
+  summary: "Eliminar un paciente"
+  description: "Elimina un paciente específico por su ID"
+  tags:
+    - "Pacientes"
+    - "Usuarios"
+  parameters:
+    - $ref: 'components.yaml#/components/parameters/password'
+    - name: "id"
+      in: "path"
+      description: "ID del paciente a eliminar"
+      required: true
+      schema:
+        type: integer
+        example: 1
+  responses:
+    204:
+      description: "Paciente eliminado exitosamente"
+    401:
+      description: "No autorizado - Contraseña incorrecta"
+    404:
+      description: "Paciente no encontrado"

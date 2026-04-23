@@ -1,0 +1,84 @@
+summary: "Endpoints para gestionar un psicólogo específico en la aplicación Psychologic"
+description: "Endpoints para gestionar un psicólogo específico por su ID en la aplicación Psychologic"
+get:
+  summary: "Obtener información de un psicólogo"
+  description: "Devuelve la información de un psicólogo específico por su ID"
+  tags: 
+    - "Psicólogos"
+    - "Usuarios"
+  parameters:
+    - $ref: 'components.yaml#/components/parameters/password'
+    - name: "id"
+      in: "path"
+      description: "ID del psicólogo a obtener"
+      required: true
+      schema:
+        type: integer
+        example: 1
+  responses:
+    200:
+      description: "Psicólogo obtenido exitosamente"
+      content:
+        application/json:
+          schema:
+            $ref: 'components.yaml#/components/schemas/psicologo_registrado'
+    401:
+      description: "No autorizado - Contraseña incorrecta"
+    404:
+      description: "Psicólogo no encontrado"
+put:
+  summary: "Actualizar información de un psicólogo"
+  description: "Actualiza la información de un psicólogo específico por su ID"
+  tags:
+    - "Psicólogos"
+    - "Usuarios"
+  parameters:
+    - $ref: 'components.yaml#/components/parameters/password'
+    - name: "id"
+      in: "path"
+      description: "ID del psicólogo a actualizar"
+      required: true
+      schema:
+        type: integer
+        example: 1
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: 'components.yaml#/components/schemas/nuevo_psicologo'
+  responses:
+    200:
+      description: "Psicólogo actualizado exitosamente"
+      content:
+        application/json:
+          schema:
+            $ref: 'components.yaml#/components/schemas/psicologo_registrado'
+    401:
+      description: "No autorizado - Contraseña incorrecta"
+    404:
+      description: "Psicólogo no encontrado"
+    409:
+      description: "Conflicto - El email ya está registrado"
+delete:
+  summary: "Eliminar un psicólogo"
+  description: "Elimina un psicólogo específico por su ID"
+  tags:
+    - "Psicólogos"
+    - "Usuarios"
+  parameters:
+    - $ref: 'components.yaml#/components/parameters/password'
+    - name: "id"
+      in: "path"
+      description: "ID del psicólogo a eliminar"
+      required: true
+      schema:
+        type: integer
+        example: 1
+  responses:
+    204:
+      description: "Psicólogo eliminado exitosamente"
+    401:
+      description: "No autorizado - Contraseña incorrecta"
+    404:
+      description: "Psicólogo no encontrado"

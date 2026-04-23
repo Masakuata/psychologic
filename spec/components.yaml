@@ -9,7 +9,7 @@ components:
         type: string
         example: "my_secure_password"
   schemas:
-    new_user:
+    nuevo_usuario:
       type: object
       properties:
         name:
@@ -18,7 +18,7 @@ components:
         email:
           type: string
           example: "juan.perez@example.com"
-    registered_user:
+    usuario_registrado:
       type: object
       properties:
         id:
@@ -30,3 +30,15 @@ components:
         email:
           type: string
           example: "juan.perez@example.com"
+    nuevo_paciente:
+      allOf:
+        - $ref: '#/components/schemas/nuevo_usuario'
+    paciente_registrado:
+      allOf:
+        - $ref: '#/components/schemas/usuario_registrado'
+    nuevo_psicologo:
+      allOf:
+        - $ref: '#/components/schemas/nuevo_usuario'
+    psicologo_registrado:
+      allOf:
+        - $ref: '#/components/schemas/usuario_registrado'

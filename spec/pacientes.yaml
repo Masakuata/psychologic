@@ -1,0 +1,53 @@
+summary: "Operaciones relacionadas con pacientes"
+description: "Endpoints para gestionar pacientes en la aplicación Psychologic"
+get:
+  summary: "Obtener lista de pacientes"
+  description: "Devuelve una lista de pacientes registrados en el sistema"
+  tags:
+    - "Pacientes"
+    - "Usuarios"
+  parameters:
+    - $ref: 'components.yaml#/components/parameters/password'
+  responses:
+    200:
+      description: "Lista de pacientes obtenida exitosamente"
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              type: object
+              allOf:
+                - $ref: 'components.yaml#/components/schemas/paciente_registrado'
+                - $ref: 'components.yaml#/components/schemas/paciente_registrado'
+    204:
+      description: "No se encontraron pacientes"
+    401:
+      description: "No autorizado - Contraseña incorrecta"
+post:
+  summary: "Crear un nuevo paciente"
+  description: "Permite crear un nuevo paciente en el sistema"
+  tags:
+    - "Pacientes"
+    - "Usuarios"
+  parameters:
+    - $ref: 'components.yaml#/components/parameters/password'
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: 'components.yaml#/components/schemas/nuevo_paciente'
+  responses:
+    201:
+      description: "Paciente creado exitosamente"
+      content:
+        application/json:
+          schema:
+            $ref: 'components.yaml#/components/schemas/paciente_registrado'
+    400:
+      description: "Solicitud inválida - Datos faltantes o incorrectos"
+    401:
+      description: "No autorizado - Contraseña incorrecta"
+    409:
+      description: "Conflicto - El email ya está registrado"

@@ -9,5 +9,11 @@ servers:
     description: "Servidor local de desarrollo"
 
 paths:
-  /users:
-    $ref: 'users.yaml'
+  /pacientes:
+    $ref: 'pacientes.yaml'
+  /pacientes/{id}:
+    $ref: 'paciente_id.yaml'
+  /psicologos:
+    $ref: 'psicologos.yaml'
+  /psicologos/{id}:
+    $ref: 'psicologo_id.yaml'

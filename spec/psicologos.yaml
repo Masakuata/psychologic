@@ -1,0 +1,52 @@
+summary: "Operaciones relacionadas con psicólogos"
+description: "Endpoints para gestionar psicólogos en la aplicación Psychologic"
+get:
+  summary: "Obtener lista de psicólogos"
+  description: "Devuelve una lista de psicólogos registrados en el sistema"
+  tags:
+    - "Psicólogos"
+    - "Usuarios"
+  parameters:
+    - $ref: 'components.yaml#/components/parameters/password'
+  responses:
+    200:
+      description: "Lista de psicólogos obtenida exitosamente"
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              type: object
+              allOf:
+                - $ref: 'components.yaml#/components/schemas/psicologo_registrado'
+    204:
+      description: "No se encontraron psicólogos"
+    401:
+      description: "No autorizado - Contraseña incorrecta"
+post:
+  summary: "Crear un nuevo psicólogo"
+  description: "Permite crear un nuevo psicólogo en el sistema"
+  tags:
+    - "Psicólogos"
+    - "Usuarios"
+  parameters:
+    - $ref: 'components.yaml#/components/parameters/password'
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: 'components.yaml#/components/schemas/nuevo_psicologo'
+  responses:
+    201:
+      description: "Psicólogo creado exitosamente"
+      content:
+        application/json:
+          schema:
+            $ref: 'components.yaml#/components/schemas/psicologo_registrado'
+    400:
+      description: "Solicitud inválida - Datos faltantes o incorrectos"
+    401:
+      description: "No autorizado - Contraseña incorrecta"
+    409:
+      description: "Conflicto - El email ya está registrado"
