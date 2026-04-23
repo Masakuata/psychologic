@@ -25,7 +25,7 @@ on:
         default: false
 
 env:
-  IMAGE_NAME: "ghcr.io/${{ github.repository_owner }}/bpsychologic"
+  IMAGE_NAME: "ghcr.io/masakuata/bpsychologic"
 
 jobs:
   build_image:
