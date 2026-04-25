@@ -7,6 +7,39 @@ servers:
   - url: 'http://localhost:42700'
     description: Servidor local de desarrollo
 paths:
+  /login:
+    summary: Iniciar sesion en el sistema
+    description: Endpoint para iniciar sesion en el sistema y obtener un JWT
+    post:
+      summary: Inciar sesion en el sistema
+      tags:
+        - Usuarios
+        - Sesion
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: juan.perez@example.com
+                password:
+                  type: string
+                  example: contrasenaSegura123
+      responses:
+        '200':
+          description: Sesion iniciada
+          content:
+            text\plain:
+              schema:
+                type: string
+                example: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlZHNvbjJAbWFpbC5jb20iLCJleHAiOjE3NzcxODg5NjYsImVtYWlsIjoiZWRzb24yQG1haWwuY29tIiwicm9sIjoicGFjaWVudGUifQ.JfchInZE0B6NOHBV11P9_q2zYepDq6xAA8dJomwE_yM
+        '400':
+          description: Solicitud inválida - Datos faltantes o incorrectos
+        '404':
+          description: Usuario no encontrado
   /pacientes:
     summary: Operaciones relacionadas con pacientes
     description: Endpoints para gestionar pacientes en la aplicación Psychologic
@@ -19,11 +52,11 @@ paths:
       parameters:
         - name: Authorization
           in: header
-          description: Contraseña para autenticación
+          description: Token de sesion
           required: true
           schema:
             type: string
-            example: my_secure_password
+            example: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlZHNvbjJAbWFpbC5jb20iLCJleHAiOjE3NzcxODg5NjYsImVtYWlsIjoiZWRzb24yQG1haWwuY29tIiwicm9sIjoicGFjaWVudGUifQ.JfchInZE0B6NOHBV11P9_q2zYepDq6xAA8dJomwE_yM
       responses:
         '200':
           description: Lista de pacientes obtenida exitosamente
@@ -55,13 +88,12 @@ paths:
             schema:
               allOf:
                 - type: object
+                  allOf:
+                    - $ref: '#/paths/~1login/post/requestBody/content/application~1json/schema'
                   properties:
                     name:
                       type: string
                       example: Juan Pérez
-                    email:
-                      type: string
-                      example: juan.perez@example.com
       responses:
         '201':
           description: Paciente creado exitosamente
@@ -70,16 +102,12 @@ paths:
               schema:
                 allOf:
                   - type: object
+                    allOf:
+                      - $ref: '#/paths/~1pacientes/post/requestBody/content/application~1json/schema/allOf/0'
                     properties:
                       id:
                         type: integer
                         example: 1
-                      name:
-                        type: string
-                        example: Juan Pérez
-                      email:
-                        type: string
-                        example: juan.perez@example.com
         '400':
           description: Solicitud inválida - Datos faltantes o incorrectos
         '401':
