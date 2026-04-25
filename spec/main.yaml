@@ -9,6 +9,8 @@ servers:
     description: "Servidor local de desarrollo"
 
 paths:
+  /login:
+    $ref: 'login.yaml'
   /pacientes:
     $ref: 'pacientes.yaml'
   /pacientes/{id}:

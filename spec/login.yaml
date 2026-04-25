@@ -1,0 +1,25 @@
+summary: "Iniciar sesion en el sistema"
+description: "Endpoint para iniciar sesion en el sistema y obtener un JWT"
+post:
+  summary: "Inciar sesion en el sistema"
+  tags:
+    - "Usuarios"
+    - "Sesion"
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: 'components.yaml#/components/schemas/login'
+  responses:
+    200:
+      description: "Sesion iniciada"
+      content:
+        text\plain:
+          schema:
+            type: string
+            example: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlZHNvbjJAbWFpbC5jb20iLCJleHAiOjE3NzcxODg5NjYsImVtYWlsIjoiZWRzb24yQG1haWwuY29tIiwicm9sIjoicGFjaWVudGUifQ.JfchInZE0B6NOHBV11P9_q2zYepDq6xAA8dJomwE_yM
+    400:
+      description: "Solicitud inválida - Datos faltantes o incorrectos"
+    404:
+      description: "Usuario no encontrado"

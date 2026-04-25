@@ -17,27 +17,31 @@ components:
         type: string
         example: "my_secure_password"
   schemas:
+    login:
+      type: object
+      properties:
+        email:
+          type: string
+          example: "juan.perez@example.com"
+        password:
+          type: string
+          example: "contrasenaSegura123"
     nuevo_usuario:
       type: object
+      allOf:
+        - $ref: '#/components/schemas/login'
       properties:
         name:
           type: string
           example: "Juan Pérez"
-        email:
-          type: string
-          example: "juan.perez@example.com"
     usuario_registrado:
       type: object
+      allOf:
+        - $ref: '#/components/schemas/nuevo_usuario'
       properties:
         id:
           type: integer
           example: 1
-        name:
-          type: string
-          example: "Juan Pérez"
-        email:
-          type: string
-          example: "juan.perez@example.com"
     nuevo_paciente:
       allOf:
         - $ref: '#/components/schemas/nuevo_usuario'
