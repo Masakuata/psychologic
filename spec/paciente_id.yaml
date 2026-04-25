@@ -7,7 +7,7 @@ get:
     - "Pacientes"
     - "Usuarios"
   parameters:
-    - $ref: 'components.yaml#/components/parameters/password'
+    - $ref: 'components.yaml#/components/parameters/token'
     - name: "id"
       in: "path"
       description: "ID del paciente a obtener"
@@ -31,7 +31,7 @@ put:
     - "Pacientes"
     - "Usuarios"
   parameters:
-    - $ref: 'components.yaml#/components/parameters/password'
+    - $ref: 'components.yaml#/components/parameters/token'
     - name: "id"
       in: "path"
       description: "ID del paciente a actualizar"
@@ -65,7 +65,7 @@ delete:
     - "Pacientes"
     - "Usuarios"
   parameters:
-    - $ref: 'components.yaml#/components/parameters/password'
+    - $ref: 'components.yaml#/components/parameters/token'
     - name: "id"
       in: "path"
       description: "ID del paciente a eliminar"

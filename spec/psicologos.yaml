@@ -7,7 +7,7 @@ get:
     - "Psicólogos"
     - "Usuarios"
   parameters:
-    - $ref: 'components.yaml#/components/parameters/password'
+    - $ref: 'components.yaml#/components/parameters/token'
   responses:
     200:
       description: "Lista de psicólogos obtenida exitosamente"
@@ -30,7 +30,7 @@ post:
     - "Psicólogos"
     - "Usuarios"
   parameters:
-    - $ref: 'components.yaml#/components/parameters/password'
+    - $ref: 'components.yaml#/components/parameters/token'
   requestBody:
     required: true
     content:

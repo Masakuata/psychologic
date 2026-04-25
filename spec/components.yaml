@@ -1,5 +1,13 @@
 components:
   parameters:
+    token:
+      name: "Authorization"
+      in: "header"
+      description: "Token de sesion"
+      required: true
+      schema:
+        type: string
+        example: "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlZHNvbjJAbWFpbC5jb20iLCJleHAiOjE3NzcxODg5NjYsImVtYWlsIjoiZWRzb24yQG1haWwuY29tIiwicm9sIjoicGFjaWVudGUifQ.JfchInZE0B6NOHBV11P9_q2zYepDq6xAA8dJomwE_yM"
     password:
       name: "Authorization"
       in: "header"

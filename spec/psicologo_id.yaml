@@ -3,11 +3,11 @@ description: "Endpoints para gestionar un psicólogo específico por su ID en la
 get:
   summary: "Obtener información de un psicólogo"
   description: "Devuelve la información de un psicólogo específico por su ID"
-  tags: 
+  tags:
     - "Psicólogos"
     - "Usuarios"
   parameters:
-    - $ref: 'components.yaml#/components/parameters/password'
+    - $ref: 'components.yaml#/components/parameters/token'
     - name: "id"
       in: "path"
       description: "ID del psicólogo a obtener"
@@ -33,7 +33,7 @@ put:
     - "Psicólogos"
     - "Usuarios"
   parameters:
-    - $ref: 'components.yaml#/components/parameters/password'
+    - $ref: 'components.yaml#/components/parameters/token'
     - name: "id"
       in: "path"
       description: "ID del psicólogo a actualizar"
@@ -67,7 +67,7 @@ delete:
     - "Psicólogos"
     - "Usuarios"
   parameters:
-    - $ref: 'components.yaml#/components/parameters/password'
+    - $ref: 'components.yaml#/components/parameters/token'
     - name: "id"
       in: "path"
       description: "ID del psicólogo a eliminar"

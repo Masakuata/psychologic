@@ -1,4 +1,4 @@
-package com.xatal.psychologic.entities;
+package com.xatal.psychologic.Structures;
 
 public enum Rol {
     PACIENTE("paciente"),

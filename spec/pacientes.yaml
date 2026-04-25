@@ -7,7 +7,7 @@ get:
     - "Pacientes"
     - "Usuarios"
   parameters:
-    - $ref: 'components.yaml#/components/parameters/password'
+    - $ref: 'components.yaml#/components/parameters/token'
   responses:
     200:
       description: "Lista de pacientes obtenida exitosamente"
@@ -31,7 +31,7 @@ post:
     - "Pacientes"
     - "Usuarios"
   parameters:
-    - $ref: 'components.yaml#/components/parameters/password'
+    - $ref: 'components.yaml#/components/parameters/token'
   requestBody:
     required: true
     content:
