@@ -4,6 +4,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
 import lombok.Data;
+import software.amazon.awssdk.regions.Region;
 
 @Data
 @Configuration
@@ -14,4 +15,5 @@ public class SupabaseConfig {
     private String s3Url;
     private String s3Id;
     private String s3Key;
+    private Region s3Region = Region.US_EAST_2;
 }

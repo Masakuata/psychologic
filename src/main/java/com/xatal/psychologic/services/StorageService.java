@@ -18,4 +18,8 @@ public class StorageService {
     public String getUploadUrl(String bucketName, String objectKey) {
         return storageRepository.getUploadUrl(bucketName, objectKey);
     }
+
+    public void deleteBucket(String bucketname) {
+        storageRepository.deleteBucket(bucketname);
+    }
 }
