@@ -19,4 +19,8 @@ spring:
         format_sql: true
 
 supabase:
+  url: ${SUPABASE_STORAGE_URL}
   password: ${SUPABASE_PASSWORD}
+  s3url: ${SUPABASE_S3_URL}
+  s3Id: ${SUPABASE_S3_ID}
+  s3Key: ${SUPABASE_S3_KEY}
