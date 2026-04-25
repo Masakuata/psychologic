@@ -2,19 +2,17 @@ spring:
   application:
     name: psychologic
     password: ${SPRING_API_PASSWORD}
-    tokenLifetime: 1
+    tokenLifetimeHours: 12
 
   datasource:
      url: ${SPRING_DB_URL}
      username: ${SPRING_DB_USERNAME}
      password: ${SPRING_DB_PASSWORD}
      driver-class-name: org.postgresql.Driver
-  
+
   jpa:
-    dialect: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
       ddl-auto: update
-      dialect: org.hibernate.dialect.PostgreSQLDialect
     show-sql: true
     properties:
       hibernate:

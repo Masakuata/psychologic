@@ -20,7 +20,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn(name = "rol")
-public abstract class Usuario {
+public class Usuario {
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     @Id
     @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
@@ -39,7 +39,11 @@ public abstract class Usuario {
 
     @JsonIgnore
     @Column(name = "is_active", nullable = false)
-    private boolean isActive;
+    private boolean isActive = true;
+
+    @JsonIgnore
+    @Column(name = "rol", nullable = false, insertable = false, updatable = false)
+    private String rol;
 
     public Usuario(String nombre, String email, String password) {
         this.nombre = nombre;

@@ -30,10 +30,10 @@ public class PasswordFilter implements jakarta.servlet.Filter {
         HttpServletRequest httpRequest = (HttpServletRequest) request;
         HttpServletResponse httpResponse = (HttpServletResponse) response;
 
-        if (!isPasswordValid(httpRequest)) {
-            httpResponse.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-            return;
-        }
+        // if (!isPasswordValid(httpRequest)) {
+        //     httpResponse.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+        //     return;
+        // }
 
         chain.doFilter(request, response);
     }
