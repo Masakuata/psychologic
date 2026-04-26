@@ -31,7 +31,8 @@ public class UsuarioService {
 	}
 
 	public Usuario login(Login login) {
-		Optional<Usuario> optionalUsuario = usuarioRepository.findByEmailAndPassword(login.email(), encodePassword(login.password()));
+		Optional<Usuario> optionalUsuario =
+			usuarioRepository.findByEmailAndPasswordAndActiveTrue(login.email(), encodePassword(login.password()));
 		return optionalUsuario.orElse(null);
 	}
 
