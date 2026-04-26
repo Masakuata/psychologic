@@ -32,10 +32,21 @@ paths:
         '200':
           description: Sesion iniciada
           content:
-            text\plain:
+            application/json:
               schema:
-                type: string
-                example: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlZHNvbjJAbWFpbC5jb20iLCJleHAiOjE3NzcxODg5NjYsImVtYWlsIjoiZWRzb24yQG1haWwuY29tIiwicm9sIjoicGFjaWVudGUifQ.JfchInZE0B6NOHBV11P9_q2zYepDq6xAA8dJomwE_yM
+                type: object
+                properties:
+                  id:
+                    type: number
+                    format: integer
+                    example: 34
+                  email:
+                    type: string
+                    format: email
+                    example: juan.perez@example.com
+                  jwt:
+                    type: string
+                    example: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlZHNvbjJAbWFpbC5jb20iLCJleHAiOjE3NzcxODg5NjYsImVtYWlsIjoiZWRzb24yQG1haWwuY29tIiwicm9sIjoicGFjaWVudGUifQ.JfchInZE0B6NOHBV11P9_q2zYepDq6xAA8dJomwE_yM
         '400':
           description: Solicitud inválida - Datos faltantes o incorrectos
         '404':
@@ -79,8 +90,6 @@ paths:
       tags:
         - Pacientes
         - Usuarios
-      parameters:
-        - $ref: '#/paths/~1pacientes/get/parameters/0'
       requestBody:
         required: true
         content:
@@ -229,8 +238,6 @@ paths:
       tags:
         - Psicólogos
         - Usuarios
-      parameters:
-        - $ref: '#/paths/~1pacientes/get/parameters/0'
       requestBody:
         required: true
         content:
