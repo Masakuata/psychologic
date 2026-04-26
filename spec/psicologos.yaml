@@ -29,8 +29,6 @@ post:
   tags:
     - "Psicólogos"
     - "Usuarios"
-  parameters:
-    - $ref: 'components.yaml#/components/parameters/token'
   requestBody:
     required: true
     content:

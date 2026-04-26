@@ -30,8 +30,6 @@ post:
   tags:
     - "Pacientes"
     - "Usuarios"
-  parameters:
-    - $ref: 'components.yaml#/components/parameters/token'
   requestBody:
     required: true
     content:
